@@ -14,7 +14,7 @@
         taskSortBy="dueDate"
         formIOJwtSecret="--- change me now ---"
         taskSortOrder="asc"
-        webSocketEncryptkey="giert989jkwrgb@DR55"
+        :webSocketEncryptkey="configs.WEB_SOCKET_ENCRYPT_KEY"
         :formIO="configs.FORMIO_CONFIG"
         :hideTaskDetails="{
           assignee: false,
@@ -72,6 +72,7 @@ export default class TaskList extends Vue {
       userRoles: process.env.VUE_APP_FORMIO_ROLES,
     },
     FORMIO_JWT_SECRET: "--- change me now ---",
+    WEB_SOCKET_ENCRYPT_KEY: process.env.VUE_WEB_SOCKET_ENCRYPT_KEY,
   };
 
   public isServiceFLowEnabled: boolean = true;
@@ -103,19 +104,22 @@ export default class TaskList extends Vue {
 .ospg-issue-list {
   height: 90vh;
 }
-/* todo: remove below 2 styles, when new npm pacakge is realeased */
+/* todo: remove below 2 styles, when new npm package is released */
 .cft-list-group {
   height: 79vh !important;
 }
 .ctf-task-details-container .task-details {
   height: 79vh !important;
 }
+.cft-list-group {
+  border-right: inset #eee;
+}
 :root {
   --bs-primary: #2699fb;
   scrollbar-color: auto;
 }
 body {
-  scrollbar-width: auto; /* "auto" or "thin" */
-  scrollbar-color: #2699fb aliceblue; /* scroll thumb and track */
+  scrollbar-width: auto;
+  scrollbar-color: #2699fb aliceblue;
 }
 </style>
