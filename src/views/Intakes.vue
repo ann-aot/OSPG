@@ -105,6 +105,7 @@ export default class Intakes extends Vue {
 .cft-list-group {
   border-right: inset #eee;
 }
+/* todo: when styles are fixed in npm package remove below style */
 .card-header {
   background-color: #003366 !important;
   color: #eee !important;
