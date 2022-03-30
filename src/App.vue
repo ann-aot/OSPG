@@ -34,11 +34,6 @@ export default class App extends Vue {
   public refreshInterval;
   public inactivityInterval;
 
-  get ospgLastActivity() {
-    const lastActivity = localStorage.getItem("ospgLastActivity");
-    return lastActivity ? new Date(lastActivity) : undefined;
-  }
-
   async renewTokenIfExpired() {
     const MINIMUM_TOKEN_VALIDITY = parseInt(
       process.env.VUE_WEB_MINIMUM_TOKEN_VALIDITY ?? "180"
@@ -58,7 +53,9 @@ export default class App extends Vue {
 
   inactiveMoreThan5m() {
     const now: Date = new Date();
-    const diffMs = +now - +(this.ospgLastActivity || now);
+    const lastActivity = localStorage.getItem("ospgLastActivity");
+    const lastActivityDate = lastActivity ? new Date(lastActivity) : now;
+    const diffMs = +now - +lastActivityDate;
     var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
     if (diffMins >= 5) {
       clearInterval(this.refreshInterval);

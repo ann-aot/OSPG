@@ -134,6 +134,10 @@ export default class TaskList extends Vue {
   --bs-body-color: #003366;
   scrollbar-color: auto;
 }
+.card-header {
+  background-color: #003366 !important;
+  color: #eee !important;
+}
 body {
   scrollbar-width: auto;
   scrollbar-color: #2699fb aliceblue;

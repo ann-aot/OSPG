@@ -1,6 +1,5 @@
 <template>
   <div>
-    ----{{ getTaskId }}-------
     <div v-if="jwttoken">
       <CamundaTasklist
         class="ospg-intake-list px-3"
@@ -105,6 +104,10 @@ export default class Intakes extends Vue {
 }
 .cft-list-group {
   border-right: inset #eee;
+}
+.card-header {
+  background-color: #003366 !important;
+  color: #eee !important;
 }
 :root {
   --bs-primary: #2699fb;
