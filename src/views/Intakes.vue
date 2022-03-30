@@ -1,5 +1,6 @@
 <template>
   <div>
+    ----{{ getTaskId }}-------
     <div v-if="jwttoken">
       <CamundaTasklist
         class="ospg-intake-list px-3"
@@ -8,9 +9,9 @@
         :formsflowaiUrl="configs.FORM_FLOW_URL"
         :formsflowaiApiUrl="configs.FORM_FLOW_API_URL"
         :getTaskId="getTaskId"
-        taskSortBy="dueDate"
-        formIOJwtSecret="--- change me now ---"
-        taskSortOrder="asc"
+        taskSortBy="created"
+        :formIOJwtSecret="configs.FORMIO_JWT_SECRET"
+        taskSortOrder="desc"
         :webSocketEncryptkey="configs.WEB_SOCKET_ENCRYPT_KEY"
         :formIO="configs.FORMIO_CONFIG"
         :hideTaskDetails="{
@@ -26,13 +27,12 @@
           sort: true,
           form: false,
         }"
+        :taskDefaultFilterListNames="configs.FILTER_LIST"
         :listItemCardStyle="false"
-        :taskDefaultFilterListNames="['OSPG Intake']"
-        v-if="isServiceFLowEnabled"
       />
     </div>
     <div class="no-content" v-else>
-      You shouldnot be here !!!
+      You should not be here !!!
       <h1>Hello</h1>
     </div>
   </div>
@@ -54,7 +54,16 @@ import CamundaTasklist from "camunda-formio-tasklist-vue/src/components/TaskList
   },
 })
 export default class Intakes extends Vue {
-  public configs = {
+  public jwttoken = Vue.prototype.$keycloak.token;
+
+  splitAndTrim(str: string) {
+    return str
+      ?.split(",")
+      ?.map((e) => e?.trim())
+      ?.filter((n) => n);
+  }
+
+  configs = {
     BPM_URL: process.env.VUE_APP_BPM_URL,
     FORM_FLOW_API_URL: process.env.VUE_APP_FORM_FLOW_API_URL,
     FORM_FLOW_URL: process.env.VUE_APP_FORM_FLOW_URL,
@@ -66,15 +75,20 @@ export default class Intakes extends Vue {
       reviewer: process.env.VUE_APP_FORM_IO_REVIEWER,
       userRoles: process.env.VUE_APP_FORMIO_ROLES,
     },
-    FORMIO_JWT_SECRET: "--- change me now ---",
     WEB_SOCKET_ENCRYPT_KEY: process.env.VUE_WEB_SOCKET_ENCRYPT_KEY,
+    FILTER_LIST: this.splitAndTrim(
+      process.env.VUE_APP_INTAKE_FILTER_LIST ?? ""
+    ),
+    FORMIO_JWT_SECRET: process.env.VUE_APP_FORMIO_JWT_SECRET,
   };
 
-  public isServiceFLowEnabled: boolean = true;
-  public jwttoken: string | boolean = false;
-  created() {
+  setCurrentToken() {
     this.jwttoken = Vue.prototype.$keycloak.token;
-    this.isServiceFLowEnabled = true;
+  }
+  created() {
+    this.$root.$on("tokenRefreshed", () => {
+      this.setCurrentToken();
+    });
   }
 }
 </script>
