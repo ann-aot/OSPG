@@ -12,7 +12,7 @@
     "camunda-formio-tasklist-vue": "https://gitpkg.now.sh/AOT-Technologies/forms-flow-ai-extensions/camunda-formio-tasklist-vue?beta-dev",
     "core-js": "^3.6.5",
     "keycloak-js": "^9.0.3",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
