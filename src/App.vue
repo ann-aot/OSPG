@@ -36,7 +36,7 @@ export default class App extends Vue {
 
   async renewTokenIfExpired() {
     const MINIMUM_TOKEN_VALIDITY = parseInt(
-      process.env.VUE_WEB_MINIMUM_TOKEN_VALIDITY ?? "180"
+      process.env.VUE_APP_MINIMUM_TOKEN_VALIDITY ?? "180"
     );
     const tokenRefreshed = await Vue.prototype.$keycloak?.updateToken(
       MINIMUM_TOKEN_VALIDITY
