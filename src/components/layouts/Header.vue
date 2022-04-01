@@ -35,7 +35,6 @@
 </template>
 
 <script lang="ts">
-// import router from "@/router";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
