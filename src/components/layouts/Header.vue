@@ -5,8 +5,16 @@
         ><img alt="OSPG" class="ospg-logo" src="../../assets/logo.svg" />
         <span class="ospg-brand mx-4">OSPG Case Management System</span></a
       >
-      <span class="ospg-header-menu" @click="goToIntakes">Intakes</span>
-      <span class="ospg-header-menu" @click="goToIssues">Issues</span>
+      <a
+        :href="$router.resolve({ name: 'Intakes' }).href"
+        class="ospg-header-menu"
+        >Intakes</a
+      >
+      <a
+        :href="$router.resolve({ name: 'Issues' }).href"
+        class="ospg-header-menu"
+        >Issues</a
+      >
       <span class="ospg-header-menu">Dashboard</span>
       <div class="dropdown">
         <a
@@ -27,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import router from "@/router";
+// import router from "@/router";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
@@ -46,16 +54,6 @@ export default class Header extends Vue {
     this.lastName = Vue.prototype.$keycloak.tokenParsed.family_name;
     if (this.firstName) this.initial += this.firstName.charAt(0);
     if (this.lastName) this.initial += this.lastName.charAt(0);
-  }
-
-  goToIntakes() {
-    router.push({ name: "Intakes" });
-    this.$router.go(0);
-  }
-
-  goToIssues() {
-    router.push({ name: "Issues" });
-    this.$router.go(0);
   }
 }
 </script>

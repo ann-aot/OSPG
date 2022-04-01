@@ -30,7 +30,7 @@
           form: false,
         }"
         :taskDefaultFilterListNames="configs.FILTER_LIST"
-        :listItemCardStyle="false"
+        :listItemCardStyle="true"
       />
     </div>
     <div class="no-content" v-else>
@@ -96,7 +96,7 @@ export default class TaskList extends Vue {
   created() {
     this.resetAlertTime();
     this.setCurrentToken();
-    this.$root.$on("goToIntake", (customEvent: any) => {
+    this.$root.$on("goToIntake", (customEvent) => {
       this.resetAlertTime();
       if (customEvent?.customEvent?.taskDetails.length === 0) {
         this.showIntakeAlert = true;
