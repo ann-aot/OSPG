@@ -27,7 +27,7 @@
           form: false,
         }"
         :taskDefaultFilterListNames="configs.FILTER_LIST"
-        :listItemCardStyle="false"
+        :listItemCardStyle="true"
       />
     </div>
     <div class="no-content" v-else>
